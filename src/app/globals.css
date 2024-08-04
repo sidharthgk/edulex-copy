@@ -1,36 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Slab:wght@400;700&family=Open+Sans:wght@400;600&family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Oswald:wght@300;400;600&family=Lato:wght@300;400;700&display=swap');
 
 body {
-  font-family: 'Open Sans', 'OpenDyslexic', Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
   line-height: 1.8;
   color: #fff;
-}
-
-@font-face {
-  font-family: 'OpenDyslexic';
-  src: url('/fonts/OpenDyslexic-Regular.otf') format('opentype');
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
 }
 
 .font-display {
-  font-family: 'Montserrat', 'OpenDyslexic', sans-serif;
+  font-family: 'Playfair Display', serif;
 }
 
 .font-heading {
-  font-family: 'Roboto Slab', 'OpenDyslexic', serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 .font-subheading {
-  font-family: 'Poppins', 'OpenDyslexic', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .font-body {
-  font-family: 'Open Sans', 'OpenDyslexic', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -90,26 +84,37 @@ body {
 .beta-signup-form input[type="text"],
 .beta-signup-form select {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem;
   margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 0.25rem;
   color: white;
+  transition: all 0.3s ease;
+}
+
+.beta-signup-form input[type="email"]:focus,
+.beta-signup-form input[type="text"]:focus,
+.beta-signup-form select:focus {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  outline: none;
 }
 
 .beta-signup-form button {
   width: 100%;
   padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.2);
+  background: #f72585;
   border: none;
   border-radius: 0.25rem;
   color: white;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .beta-signup-form button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #b5179e;
 }
