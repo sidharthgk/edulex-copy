@@ -58,16 +58,7 @@ class RegisteredUserController extends Controller
         $userData['email_verified_at'] = now();
         $user = User::create($userData);
 
-        $response = Http::post(env('APP_URL') . '/oauth/token', [
-            'grant_type' => 'password',
-            'client_id' => env('PASSPORT_PASSWORD_CLIENT_ID'),
-            'client_secret' => env('PASSPORT_PASSWORD_SECRET'),
-            'username' => $userData['email'],
-            'password' => $userData['password'],
-            'scope' => '',
-        ]);
-
-        $user['token'] = $response->json();
+        $user['token'] = $user->createToken('API Token')->accessToken;
 
         return response()->json([
             'success' => true,
