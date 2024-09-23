@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
         $userData['email_verified_at'] = now();
         $user = User::create($userData);
 
-        $user['token'] = $user->createToken('API Token')->accessToken;
+        $user['token'] = $user->createToken('authToken')->accessToken;
 
         return response()->json([
             'success' => true,
