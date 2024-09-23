@@ -21,6 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         //
+        $middleware->validateCsrfTokens(except: [
+            'v1/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
