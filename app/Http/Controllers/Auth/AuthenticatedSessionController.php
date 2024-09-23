@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\RefreshTokenRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -51,6 +52,27 @@ class AuthenticatedSessionController extends Controller
             ], 401);
         }
 
+    }
+
+    /**
+     * refresh token
+     *
+     * @return void
+     */
+    public function refreshToken(RefreshTokenRequest $request): JsonResponse
+    {
+        // remove old token
+        $request->user()->token()->revoke();
+
+        // refresh token using passport
+        $response = Auth::user()->createToken('authToken')->accessToken;
+
+        return response()->json([
+            'success' => true,
+            'statusCode' => 200,
+            'message' => 'Refreshed token.',
+            'data' => $response,
+        ], 200);
     }
 
     /**
