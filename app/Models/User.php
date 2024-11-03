@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Bavix\Wallet\Traits\HasWalletFloat;
+use Bavix\Wallet\Interfaces\WalletFloat;
+use Bavix\Wallet\Interfaces\Wallet;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements Wallet
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasWalletFloat;
 
     /**
      * The attributes that are mass assignable.
