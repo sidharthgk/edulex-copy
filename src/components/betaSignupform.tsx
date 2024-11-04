@@ -14,7 +14,7 @@ export default function BetaSignupForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="beta-signup-form bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-lg shadow-md">
+    <form onSubmit={handleSubmit} className="beta-signup-form bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-lg shadow-md" data-netlify="true">
       <h3 className="text-xl font-heading mb-4 text-white">Join our waitlist and try us completely free!</h3>
       <p className="mb-4 text-white">We will email you a link to the email provided once we beta launch.</p>
       
