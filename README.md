@@ -1,83 +1,59 @@
 # 📘 Project API Documentation
 
-Welcome to the official documentation for our project’s API! Built with **Laravel** and **MySQL**, this API provides powerful endpoints for user authentication, wallet management, and subscription plan purchases, all secured with **token-based authentication**. Let’s dive into the technical details that make this API robust, secure, and easy to work with.
-
----
+Welcome to the internal API documentation for our backend project. This API is built using **Laravel PHP** and **MySQL**, providing essential services for user authentication, wallet management, and subscription purchases.
 
 ![Laravel Logo](https://laravel.com/img/logomark.min.svg)
 
----
+## ⚙️ Tech Stack
 
-## ⚙️ **Tech Stack Overview**
+### Backend Framework
+- **Laravel**: A PHP framework that enables efficient development with expressive syntax and a strong ecosystem.
+- **Database**: MySQL, used for secure data storage and efficient querying.
+- **ORM**: Eloquent ORM, providing a fluent interface for database operations.
 
-### 🛠 **Backend Language & Framework**
-- **Language**: PHP
-- **Framework**: [Laravel](https://laravel.com) (v8+)
-
-This API is powered by **Laravel**, a popular PHP framework known for its clean syntax and efficient workflow, allowing us to develop secure and scalable applications quickly.
-
-### 📊 **Database**
-- **Database**: MySQL
-- **ORM**: Eloquent ORM
-
-**MySQL** handles our data storage needs, and **Eloquent ORM** makes data manipulation simple and expressive.
+### Core Libraries
+- **Laravel Passport**: Provides secure OAuth2-based token authentication for managing API access.
+- **Laravel Wallet**: Manages user wallet functionality, enabling balance tracking and transaction handling.
+- **Validation & Middleware**: Laravel’s native validation and middleware ensure secure, reliable request handling.
 
 ---
 
-## 🔌 **Key Libraries and Tools**
+## Key Functionalities
 
-Our API uses a collection of essential packages to streamline development and enhance functionality:
+1. **User Authentication & Authorization**  
+   - Handles user registration, login, and token management using **Laravel Passport**.
+   
+2. **Profile Management**  
+   - Allows users to view and manage their profile data.
+   
+3. **Wallet Operations**  
+   - Provides endpoints for checking wallet balances, depositing funds, and managing transactions.
 
-- 🛡 **Laravel Passport**: OAuth2-based token authentication to ensure secure and reliable access to API endpoints.
-- 💰 **Laravel Wallet**: Manages user wallets, balances, and transactions, enabling efficient handling of financial operations within the API.
-- 📏 **Laravel Validation & Middleware**: Provides strict request validation and middleware for access control, ensuring smooth and error-free interactions.
+4. **Subscription Plan Management**  
+   - Users can view and purchase available plans, utilizing funds from their wallet.
 
-> 💡 **Note**: We’ve used **Laravel Passport** for authentication, but **Laravel Sanctum** could be considered as a lightweight alternative for single-page applications or mobile clients.
-
----
-
-## 🌟 **Core Features**
-
-1. **🔐 User Authentication & Authorization**
-   - Secure login, registration, and token management with Laravel Passport, enabling reliable user sessions and authentication flows.
-
-2. **👤 User Profile Management**
-   - Fetch and update user details to provide a tailored experience for each authenticated user.
-
-3. **💵 Wallet Operations**
-   - Easily check wallet balances, deposit funds, and process payments with endpoints powered by **Laravel Wallet**.
-
-4. **📄 Plan Management**
-   - Access and purchase subscription plans using wallet funds, complete with all the plan details users need.
-
-5. **⚠️ Error Handling & Validation**
-   - Built-in validation and detailed error messages simplify debugging and ensure safe, efficient interactions.
+5. **Error Handling**  
+   - Comprehensive validation and error responses for smooth troubleshooting and secure operation.
 
 ---
 
-## 🚀 **Getting Started with Postman**
+## Postman Documentation
 
-To get started testing our API quickly, check out the **Postman Documentation** with pre-configured endpoints:
+For easy testing and integration within the organization, here is the link to the **Postman Collection** with pre-configured endpoints:
 
-🔗 **[Postman Collection](https://www.postman.com/your-link-here)**
+🔗 **[Postman Collection - Internal Use Only](https://www.postman.com/your-internal-link-here)**
 
-Simply import the collection into Postman and start making requests!
-
----
-
-## 🔒 **Security First**
-
-Security is our top priority. With **Laravel Passport** for token-based authentication and **HTTPS** for encrypted data transfer, we ensure every interaction with the API is safe from unauthorized access.
+Import the collection into Postman and set up the environment variables as required for secure testing.
 
 ---
 
-## 📚 API Versioning
+## Security and Access
 
-This documentation covers **API Version 1** (`/api/v1/`), allowing us to make updates in the future while keeping existing clients functional.
+Since this is a private API, security is a top priority. **Laravel Passport** provides token-based authentication, while role-based middleware ensures restricted access to sensitive endpoints. All data transfers are encrypted via HTTPS, and session management is carefully monitored.
 
 ---
 
-Whether you’re building a web or mobile client, our API is designed to be easy to integrate and scalable to your needs. Jump into the **Endpoints** below and start building! 🚀
+For further details on each endpoint, refer to the sections below.
 
 # API Documentation
 
