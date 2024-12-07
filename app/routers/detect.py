@@ -2,6 +2,7 @@ from fastapi import APIRouter, UploadFile, File, BackgroundTasks, HTTPException
 import os
 import shutil
 from moviepy.video.io.VideoFileClip import VideoFileClip
+from app.services.queue_handler import add_task_to_queue
 
 
 router = APIRouter(prefix="/detect", tags=["Detection"])
@@ -31,6 +32,9 @@ async def detect(
     # Extract audio and store in the same directory
     audio_path = os.path.splitext(video_path)[0] + ".wav"
     extract_audio(video_path, audio_path)
+
+    # Add the processing task to the queue
+    add_task_to_queue(user_id, lambda: process_video(user_id, video_path, audio_path))
 
     # Add task for processing video
     if background_tasks:
