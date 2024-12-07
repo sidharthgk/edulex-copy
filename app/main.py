@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import detect
+from app.routers import detect, queue
 
 app = FastAPI(
     title="Dyslexia Detection API",
@@ -9,6 +9,7 @@ app = FastAPI(
 
 # Include routers
 app.include_router(detect.router)
+app.include_router(queue.router)
 
 @app.get("/")
 async def root():

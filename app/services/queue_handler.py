@@ -1,6 +1,15 @@
 import threading
 from queue import Queue
-from typing import Dict, Callable
+from typing import Dict, Callable, List
+
+
+def get_queued_tasks() -> Dict[str, List[str]]:
+    """Get a snapshot of all queued tasks for each user."""
+    snapshot = {}
+    for user_id, queue in user_queues.items():
+        snapshot[user_id] = list(queue.queue)  # Convert queue to a list for easier inspection
+    return snapshot
+
 
 # Global dictionary to hold queues for each user
 user_queues: Dict[str, Queue] = {}
