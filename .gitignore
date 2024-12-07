@@ -1,0 +1,17 @@
+# FastAPI
+
+__pycache__
+.env
+
+# PyCharm
+.idea
+*.iml
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Python
+*.pyc
+
+# Virtualenv
+venv
