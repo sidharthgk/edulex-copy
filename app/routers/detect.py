@@ -46,9 +46,18 @@ async def detect(
 def extract_audio(video_path: str, audio_path: str):
     try:
         video = VideoFileClip(video_path)
+
+        # Check if the video contains an audio track
+        if video.audio is None:
+            raise ValueError("The uploaded video does not contain an audio track.")
+
+        # Extract and save the audio
         video.audio.write_audiofile(audio_path)
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error extracting audio: {str(e)}")
+
 
 def process_video(user_id: str, video_path: str, audio_path: str):
     # Placeholder for video processing logic
