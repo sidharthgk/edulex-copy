@@ -1,7 +1,8 @@
 from fastapi import APIRouter, UploadFile, File, BackgroundTasks, HTTPException
-from typing import Optional
 import os
 import shutil
+from moviepy.video.io.VideoFileClip import VideoFileClip
+
 
 router = APIRouter(prefix="/detect", tags=["Detection"])
 
@@ -14,6 +15,10 @@ async def detect(
     video: UploadFile = File(...),
     background_tasks: BackgroundTasks = None,
 ):
+    # Validate file type
+    if not video.content_type.startswith("video/"):
+        raise HTTPException(status_code=400, detail="Invalid file type. Please upload a video file.")
+
     # Create user directory
     user_dir = os.path.join(BASE_DIR, user_id)
     os.makedirs(user_dir, exist_ok=True)
@@ -23,17 +28,30 @@ async def detect(
     with open(video_path, "wb") as buffer:
         shutil.copyfileobj(video.file, buffer)
 
+    # Extract audio and store in the same directory
+    audio_path = os.path.splitext(video_path)[0] + ".wav"
+    extract_audio(video_path, audio_path)
+
     # Add task for processing video
     if background_tasks:
-        background_tasks.add_task(process_video, user_id, video_path)
+        background_tasks.add_task(process_video, user_id, video_path, audio_path)
 
     return {
-        "message": "Video uploaded successfully and processing started!",
+        "message": "Video uploaded successfully, audio extracted, and processing started!",
         "user_id": user_id,
         "video_path": video_path,
+        "audio_path": audio_path,
     }
 
-def process_video(user_id: str, video_path: str):
+def extract_audio(video_path: str, audio_path: str):
+    try:
+        video = VideoFileClip(video_path)
+        video.audio.write_audiofile(audio_path)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error extracting audio: {str(e)}")
+
+def process_video(user_id: str, video_path: str, audio_path: str):
     # Placeholder for video processing logic
     print(f"Processing video for user {user_id}: {video_path}")
-    # Your video processing logic goes here
+    print(f"Processing audio for user {user_id}: {audio_path}")
+    # Your video and audio processing logic goes here
