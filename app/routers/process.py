@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.db.crud import update_task_status, get_all_tasks as get_queued_tasks
 from app.db.models import SessionLocal
+from app.db.crud import get_queued_tasks, update_task_status
 from app.services.video_processing import process_video_for_dyslexia
 
 router = APIRouter(prefix="/process", tags=["Task Processing"])
 
+# Dependency to get the database session
 def get_db():
     db = SessionLocal()
     try:
@@ -15,7 +16,10 @@ def get_db():
 
 @router.post("/")
 async def process_tasks(db: Session = Depends(get_db)):
-    tasks = get_queued_tasks(db)
+    """
+    Process all tasks in the 'queued' state.
+    """
+    tasks = get_queued_tasks(db)  # Fetch only queued tasks
     results = {}
 
     for task in tasks:
@@ -23,14 +27,14 @@ async def process_tasks(db: Session = Depends(get_db)):
             # Mark task as processing
             update_task_status(db, task.id, "processing")
 
-            # Process the video
+            # Process the video (eye-tracking logic)
             result = process_video_for_dyslexia(task.video_path)
 
-            # Mark task as completed
+            # Mark task as completed with results
             update_task_status(db, task.id, "completed", result=str(result))
             results[task.id] = "completed"
         except Exception as e:
-            # Mark task as failed
+            # Mark task as failed with error details
             update_task_status(db, task.id, "failed", result=str(e))
             results[task.id] = f"failed: {str(e)}"
 
