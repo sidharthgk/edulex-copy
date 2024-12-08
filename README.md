@@ -1,9 +1,7 @@
 # 🌟 **AR Learning Aid (Edulex AI)** 🌟  
 **An AI-powered learning platform tailored for dyslexic students.**
 
-[![AI-Powered](https://img.shields.io/badge/AI-Powered-blue)](https://github.com/edulex)  
-[![Augmented Reality](https://img.shields.io/badge/AR-Enabled-green)](https://github.com/edulex)  
-[![Private Project](https://img.shields.io/badge/Status-Private-red)](https://github.com/edulex)  
+[![AI-Powered](https://img.shields.io/badge/AI-Powered-blue)](https://github.com/edulex) [![Augmented Reality](https://img.shields.io/badge/AR-Enabled-green)](https://github.com/edulex) [![Private Project](https://img.shields.io/badge/Status-Private-red)](https://github.com/edulex)  
 
 ---
 
@@ -30,18 +28,44 @@ Edulex AI is a private project focused on improving learning outcomes for dyslex
 Here’s how the app connects to the overall Edulex ecosystem:
 
 ```mermaid
-graph TD
+graph LR
+    %% Style Definitions
     style App fill:#f9c,stroke:#333,stroke-width:2px,color:#000
     style Backend fill:#9bf6ff,stroke:#333,stroke-width:2px,color:#000
-    style API fill:#ffadad,stroke:#333,stroke-width:2px,color:#000
-    style Website fill:#caffbf,stroke:#333,stroke-width:2px,color:#000
-    style Docs fill:#bdb2ff,stroke:#333,stroke-width:2px,color:#000
-    
-    App[Mobile App] --> Backend[Backend Services]
-    Backend --> API[Dyslexia Detection API]
-    Backend --> Website[Landing Website]
-    Docs[Documentation] --> Backend
-    Docs --> App
+    style RedisMySQL fill:#ffadad,stroke:#333,stroke-width:2px,color:#000
+    style DDEM fill:#caffbf,stroke:#333,stroke-width:2px,color:#000
+    style PEPM fill:#ffc6ff,stroke:#333,stroke-width:2px,color:#000
+    style PAS fill:#d4a373,stroke:#333,stroke-width:2px,color:#000
+    style ARCharacter fill:#9c88ff,stroke:#333,stroke-width:2px,color:#fff
+    style HumeAPI fill:#63cdda,stroke:#333,stroke-width:2px,color:#fff
+
+    %% Nodes
+    App[React Native App]
+    Backend[Laravel Backend]
+    RedisMySQL[Redis & MySQL]
+    DDEM[Dyselexia Detection Module]
+    PEPM[Personality Profiler Module]
+    PAS[Payments & Subscriptions]
+    ARCharacter[AR Character]
+    HumeAPI[Hume API]
+    DDEM_Eye[Eye Tracking]
+    DDEM_Hand[Handwriting]
+    DDEM_Sound[Sound Analysis]
+    DDEM_Quest[Questionnaire]
+
+    %% Connections
+    App --> Backend
+    Backend --> RedisMySQL
+    App --> DDEM
+    DDEM --> DDEM_Eye
+    DDEM --> DDEM_Hand
+    DDEM --> DDEM_Sound
+    DDEM --> DDEM_Quest
+    App --> PEPM
+    App --> PAS
+    App --> ARCharacter
+    ARCharacter --> HumeAPI
+    HumeAPI --> Backend
 ```
 
 The **Mobile App** is central to the system, connecting seamlessly with:  
