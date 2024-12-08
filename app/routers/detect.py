@@ -3,18 +3,32 @@ import os
 import shutil
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from app.services.queue_handler import add_task_to_queue
+from sqlalchemy.orm import Session
+from fastapi import Depends
+from app.db.models import SessionLocal
+from app.db.crud import create_task, update_task_status
 
 
 router = APIRouter(prefix="/detect", tags=["Detection"])
 
-BASE_DIR = "app/data"
+BASE_DIR = "app/data/uploads"
 os.makedirs(BASE_DIR, exist_ok=True)  # Ensure the base directory exists
+
+
+# Dependency to get the database session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @router.post("/")
 async def detect(
     user_id: str,
     video: UploadFile = File(...),
     background_tasks: BackgroundTasks = None,
+    db: Session = Depends(get_db),
 ):
     # Validate file type
     if not video.content_type.startswith("video/"):
@@ -33,8 +47,8 @@ async def detect(
     audio_path = os.path.splitext(video_path)[0] + ".wav"
     extract_audio(video_path, audio_path)
 
-    # Add the processing task to the queue
-    add_task_to_queue(user_id, lambda: process_video(user_id, video_path, audio_path))
+    # Save the task to the database
+    task = create_task(db=db, user_id=user_id, video_path=video_path, audio_path=audio_path)
 
     # Add task for processing video
     if background_tasks:
