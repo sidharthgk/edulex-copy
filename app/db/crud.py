@@ -22,3 +22,11 @@ def update_task_status(db: Session, task_id: int, status: str, result: str = Non
 def get_all_tasks(db: Session):
     """Retrieve all tasks."""
     return db.query(Task).all()
+
+def get_queued_tasks(db: Session):
+    """Retrieve tasks in the 'queued' state."""
+    return db.query(Task).filter(Task.status == "queued").all()
+
+def get_task_by_id(db: Session, task_id: int):
+    """Retrieve a specific task by its ID."""
+    return db.query(Task).filter(Task.id == task_id).first()
