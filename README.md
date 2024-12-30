@@ -1,93 +1,204 @@
-# AR Learning Aid
+# 🌟 **AR Learning Aid (Edulex AI)** 🌟  
+**An AI-powered learning platform tailored for dyslexic students.**
 
+[![AI-Powered](https://img.shields.io/badge/AI-Powered-blue)](https://github.com/edulex) [![Augmented Reality](https://img.shields.io/badge/AR-Enabled-green)](https://github.com/edulex) [![Private Project](https://img.shields.io/badge/Status-Private-red)](https://github.com/edulex)  
 
+---
 
-## Getting started
+## 📖 **Table of Contents**
+1. [Overview](#overview)  
+2. [System Architecture](#system-architecture)  
+3. [Repository Structure](#repository-structure)  
+4. [Sub-Repository Details](#sub-repository-details)  
+5. [Tech Stack](#tech-stack)  
+6. [Roadmap](#roadmap)  
+7. [Deployment & Installation](#deployment--installation)  
+8. [Scalability](#scalability)  
+9. [Methodology](#methodology)  
+10. [Maintainers](#maintainers)  
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+---
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## 📜 **Overview**
+Edulex AI is a private project focused on improving learning outcomes for dyslexic students by leveraging AI and AR technologies. The platform provides tools like a mobile app with interactive AR experiences, a backend for user and data management, and a detection API to identify dyslexia patterns. The repository is organized as a monorepo for seamless integration of all components.
 
-## Add your files
+---
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## 🎨 **System Architecture**
+Here’s how the app connects to the overall Edulex ecosystem:
 
+```mermaid
+graph LR
+    %% Style Definitions
+    style App fill:#f9c,stroke:#333,stroke-width:2px,color:#000
+    style Backend fill:#9bf6ff,stroke:#333,stroke-width:2px,color:#000
+    style RedisMySQL fill:#ffadad,stroke:#333,stroke-width:2px,color:#000
+    style DDEM fill:#caffbf,stroke:#333,stroke-width:2px,color:#000
+    style PEPM fill:#ffc6ff,stroke:#333,stroke-width:2px,color:#000
+    style PAS fill:#d4a373,stroke:#333,stroke-width:2px,color:#000
+    style ARCharacter fill:#9c88ff,stroke:#333,stroke-width:2px,color:#fff
+    style HumeAPI fill:#63cdda,stroke:#333,stroke-width:2px,color:#fff
+
+    %% Nodes
+    App[React Native App]
+    Backend[Laravel Backend]
+    RedisMySQL[Redis & MySQL]
+    DDEM[Dyselexia Detection Module]
+    PEPM[Personality Profiler Module]
+    PAS[Payments & Subscriptions]
+    ARCharacter[AR Character]
+    HumeAPI[Hume API]
+    DDEM_Eye[Eye Tracking]
+    DDEM_Hand[Handwriting]
+    DDEM_Sound[Sound Analysis]
+    DDEM_Quest[Questionnaire]
+
+    %% Connections
+    App --> Backend
+    Backend --> RedisMySQL
+    App --> DDEM
+    DDEM --> DDEM_Eye
+    DDEM --> DDEM_Hand
+    DDEM --> DDEM_Sound
+    DDEM --> DDEM_Quest
+    App --> PEPM
+    App --> PAS
+    App --> ARCharacter
+    ARCharacter --> HumeAPI
+    HumeAPI --> Backend
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/frestonanalytics/ar-learning-aid.git
-git branch -M main
-git push -uf origin main
+
+The **Mobile App** is central to the system, connecting seamlessly with:  
+- **Backend Services**: Handles users, AI processing, and APIs.  
+- **Dyslexia Detection API**: Analyzes and provides learning recommendations.  
+- **Landing Website**: Showcases Edulex AI’s features.  
+- **Documentation**: Developer and maintainer guides.
+
+---
+
+## 📂 **Repository Structure**
+The repository is organized as a **monorepo**, bundling all critical components:  
+
+```plaintext
+Edulex-AI/
+├── app/                     # Mobile app (React Native)
+├── backend/                 # Core backend services
+├── dyslexia-detection-api/  # API for dyslexia detection
+├── landing/                 # Public-facing website (prod branch)
+├── docs/                    # Internal documentation
+└── README.md                # This file
 ```
 
-## Integrate with your tools
+Each folder represents a sub-repository for modular and scalable development.
 
-- [ ] [Set up project integrations](https://gitlab.com/frestonanalytics/ar-learning-aid/-/settings/integrations)
+---
 
-## Collaborate with your team
+## 📜 **Sub-Repository Details**
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+### 1️⃣ **Dyslexia Detection API**
+- **Path**: `./dyslexia-detection-api/`  
+- **Purpose**: Detect patterns in text to assist dyslexic students.  
+- **Features**:  
+  - Machine learning-based text analysis.  
+  - Integration with backend for personalized recommendations.
 
-## Test and Deploy
+---
 
-Use the built-in continuous integration in GitLab.
+### 2️⃣ **Backend**
+- **Path**: `./backend/`  
+- **Purpose**: Core logic for managing users, AI processing, and APIs.  
+- **Features**:  
+  - User authentication and management.  
+  - Communication with the detection API and app.  
+  - Centralized API endpoints.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+---
 
-***
+### 3️⃣ **Landing Website**
+- **Path**: `./landing/`  
+- **Purpose**: Edulex AI’s public-facing website.  
+- **Branch**: `prod` (live site).  
+- **Features**:  
+  - Explains platform features.  
+  - Manages user signups and outreach.
 
-# Editing this README
+---
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### 4️⃣ **Mobile App**
+- **Path**: `./app/`  
+- **Purpose**: Primary interface for students.  
+- **Features**:  
+  - AR-based games and quizzes.  
+  - Emotion recognition using Hume AI.  
+  - Tools for reading and learning assistance.
 
-## Suggestions for a good README
+---
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### 5️⃣ **Documentation**
+- **Path**: `./docs/`  
+- **Purpose**: Internal guides for developers and maintainers.  
+- **Includes**:  
+  - Setup instructions.  
+  - System architecture diagrams.  
+  - Debugging and maintenance tips.
 
-## Name
-Choose a self-explaining name for your project.
+---
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+## 🛠 **Tech Stack**
+- **Frontend**: React Native, Tailwind CSS  
+- **Backend**: Node.js, Laravel, FastAPI  
+- **AI**: Hume AI, Machine Learning models  
+- **Database**: MySQL, Supabase  
+- **Hosting**: Wexron Hosting, DigitalOcean, Cloudflare DNS  
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+---
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## 🚧 **Roadmap**
+- [x] Integrate Dyslexia Detection API with backend.  
+- [x] Develop AR quizzes and games.  
+- [x] Deploy the `prod` branch for the landing site.  
+- [ ] Enhance emotion recognition using real-time analysis.  
+- [ ] Expand database for multilingual learning support.  
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+---
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## 🚀 **Deployment & Installation**
+1. Clone the repository:  
+   ```bash
+   git clone git@github.com:edulex/edulex-ai.git
+   cd edulex-ai
+   ```
+2. Install dependencies:  
+   ```bash
+   npm install
+   ```
+3. Run the project:  
+   ```bash
+   npm start
+   ```
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+---
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## 🌐 **Scalability**
+Edulex AI’s modular structure ensures:
+- Easy updates for individual components without affecting others.  
+- Seamless scaling to support more students and features.  
+- Multi-cloud deployment for enhanced reliability.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+---
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## 📚 **Methodology**
+Edulex AI is built on agile principles, focusing on:
+- Incremental development for rapid feature delivery.  
+- AI-driven insights for personalized learning.  
+- Feedback loops for continuous improvement.  
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+---
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## 👨‍💻 **Maintainers**
+- **Albin Varghese ✨** ([albinvar](https://github.com/albinvar))  
+- **Athul Krishna** ([akomblished_bug](https://github.com/akomblished_bug))  
+- **Rahul Abraham** ([rahul](https://github.com/rahul))  
+- **Sidharth Gopalakrishnan** ([sidhu](https://github.com/sidhu))  
 
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+---
